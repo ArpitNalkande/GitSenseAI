@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GitSenseAI.Api/GitSenseAI.Api.csproj" />
+    <Project Path="src/GitSenseAI.Domain/GitSenseAI.Domain.csproj" />
+    <Project Path="src/GitSenseAI.Infrastructure/GitSenseAI.Infrastructure.csproj" />
+    <Project Path="src/GitSenseAI.Shared/GitSenseAI.Shared.csproj" />
+  </Folder>
+</Solution>
