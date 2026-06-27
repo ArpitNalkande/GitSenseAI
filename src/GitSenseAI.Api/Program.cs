@@ -1,6 +1,7 @@
 using GitSenseAI.Infrastructure.Configurations;
 using GitSenseAI.Infrastructure.Github;
 using GitSenseAI.Api.Features.Repository.AnalyzeRepository;
+using GitSenseAI.Api.Features.Repository.RepositoryDetails;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,5 +31,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapAnalyzeRepositoryEndpoint();
+app.MapRepositoryDetailsEndpoint();
 
 app.Run();

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitSenseAI.Infrastructure.Github;
+using GitSenseAI.Infrastructure.Github.Models;
 
-namespace GitSenseAI.Infrastructure.Github
+public interface IGithubRepositoryService
 {
-    public interface IGithubRepositoryService
-    {
-        Task<GithubRepositoryResponse?> GetRepositoryAsync(string owner, string repo);
-
-         
-    }
+    Task<GithubRepositoryResponse?> GetRepositoryAsync(string owner, string repository);
+    Task<List<GithubContributorResponse>> GetContributorsAsync(string owner, string repository);
+    Task<List<GithubCommitResponse>> GetCommitsAsync(string owner, string repository);
+    Task<List<GithubPullRequestResponse>> GetPullRequestsAsync(string owner, string repository);
+    Task<List<GithubIssueResponse>> GetIssuesAsync(string owner, string repository);
 }
