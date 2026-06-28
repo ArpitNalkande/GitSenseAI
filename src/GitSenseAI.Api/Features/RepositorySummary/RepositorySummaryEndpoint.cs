@@ -52,6 +52,8 @@ public static class RepositorySummaryEndpoint
                 };
 
                 var prompt = BuildPrompt(details);
+                Console.WriteLine(
+                $"Prompt Length: {prompt.Length}");
 
                 var aiResponse = await aiService.GenerateAsync(prompt);
 
@@ -74,15 +76,15 @@ public static class RepositorySummaryEndpoint
     {
         var commits = string.Join(
             Environment.NewLine,
-            details.Commits.Select(x => $"- {x.Commit.Message}"));
+            details.Commits.Take(5).Select(x => $"- {x.Commit.Message}"));
 
         var issues = string.Join(
             Environment.NewLine,
-            details.Issues.Select(x => $"- {x.Title}"));
+            details.Issues.Take(5).Select(x => $"- {x.Title}"));
 
         var contributors = string.Join(
             Environment.NewLine,
-            details.Contributors.Select(x => $"- {x.Login} ({x.Contributions})"));
+            details.Contributors.Take(5).Select(x => $"- {x.Login} ({x.Contributions})"));
 
         return $$"""
 You are a senior engineering manager.

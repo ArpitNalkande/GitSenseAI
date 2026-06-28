@@ -16,6 +16,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "ReactPolicy",
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "http://localhost:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.Configure<GithubOptions>(
     builder.Configuration.GetSection(
         GithubOptions.SectionName));
@@ -31,6 +45,7 @@ builder.Services.AddScoped<IEmbeddingService, SimpleEmbeddingService>();
 builder.Services.AddScoped<IRetrievalService,SemanticRetrievalService>();
 
 var app = builder.Build();
+app.UseCors("ReactPolicy");
 
 if (app.Environment.IsDevelopment())
 {
