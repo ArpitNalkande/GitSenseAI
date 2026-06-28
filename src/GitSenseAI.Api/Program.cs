@@ -1,7 +1,10 @@
-using GitSenseAI.Infrastructure.Configurations;
-using GitSenseAI.Infrastructure.Github;
+using GitSenseAI.Api.Features.AI.RepositorySummary;
 using GitSenseAI.Api.Features.Repository.AnalyzeRepository;
 using GitSenseAI.Api.Features.Repository.RepositoryDetails;
+using GitSenseAI.Infrastructure.AI;
+using GitSenseAI.Infrastructure.Configurations;
+using GitSenseAI.Infrastructure.Github;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,14 @@ builder.Services.AddScoped<
     IGithubRepositoryService,
     GithubRepositoryService>();
 
+builder.Services.Configure<GeminiOptions>(
+    builder.Configuration.GetSection(
+        GeminiOptions.SectionName));
+
+builder.Services.AddScoped<
+    IAIService,
+    GeminiAIService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -32,5 +43,6 @@ app.UseHttpsRedirection();
 
 app.MapAnalyzeRepositoryEndpoint();
 app.MapRepositoryDetailsEndpoint();
+app.MapRepositorySummaryEndpoint();
 
 app.Run();

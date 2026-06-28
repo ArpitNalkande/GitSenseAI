@@ -19,4 +19,11 @@
     <ProjectReference Include="..\GitSenseAI.Shared\GitSenseAI.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\AI\" />
+    <Folder Include="Features\Embeddings\" />
+    <Folder Include="Features\Chat\" />
+    <Folder Include="Features\Search\" />
+  </ItemGroup>
+
 </Project>
